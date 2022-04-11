@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block page-css %}
+    <script src="/static/js/edit_user.js"></script>
+    <style>
+        body {
+            background-image: url("/static/image/04.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+        }
+
+        .center {
+            width: 700px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+{% endblock %}
+{% block main %}
+    <div class="panel panel-primary center ">
+        <div class="panel-heading">编辑用户<i class="fa fa-thumb-tack pull-right"></i></div>
+        <div class="panel-body">
+            <form name="Form" class="form-horizontal" method="post" action="/app/edit_user/?id={{ user.id }} "
+                  onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">用户名：</label>
+                    <label class="col-sm-4 left-label">{{ user.username }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">权限：</label>
+                    {% if user.is_superuser %}
+                        <div class="radioStyle col-sm-4">
+                            <input type="radio" name="superuser" value="1" id="likeL" checked>
+                            <label for="likeL">管理员</label>
+                            <input type="radio" name="superuser" value="0" id="likeD">
+                            <label for="likeD">成员</label>
+                        </div>
+                    {% else %}
+                        <div class="radioStyle col-sm-4">
+                            <input type="radio" name="superuser" value="1" id="likeL">
+                            <label for="likeL">管理员</label>
+                            <input type="radio" name="superuser" value="0" id="likeD" checked>
+                            <label for="likeD">成员</label>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="first_name" class="col-sm-2 control-label">姓名：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="" id="first_name" name="first_name" value={{ user.first_name }}>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword" class="col-sm-2 control-label">新密码：</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="" id="newPassword" name="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newPasswordAgain" class="col-sm-2 control-label">请再次输入：</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="" id="newPasswordAgain" name="passwordagain">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">更改</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        if ("{{ success }}") {
+            var msg = confirm("修改成功！");
+            if (msg) {
+                window.location.href = "/app/list_user";
+            }
+        }
+    </script>
+{% endblock %}

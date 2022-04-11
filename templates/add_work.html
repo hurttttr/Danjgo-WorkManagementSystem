@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block page-css %}
+    <style>
+        body {
+            background-image: url("/static/image/04.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+        }
+
+        .center {
+            width: 600px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+{% endblock %}
+
+{% block bar %}
+
+{% endblock %}
+
+{% block main %}
+    <div class="panel panel-primary center ">
+        <div class="panel-heading">添加作业<i class="fa fa-thumb-tack pull-right"></i></div>
+        <div class="panel-body">
+            <form class="form-horizontal" method="post">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label ">作业名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="workname" id="inputWorkname" placeholder="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">截止日期</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" name="deadline" id="inputDeadline">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">截止时间</label>
+                    <div class="col-sm-10">
+                        <input type="time" class="form-control" name="deadlinetime" id="inputDeadlinetime">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

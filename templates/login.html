@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>请登录</title>
+    <link rel="stylesheet" href="/static/css/login.css" type="text/css"/>
+    <script src="/static/js/login.js"></script>
+    <script src="https://kit.fontawesome.com/faf744a474.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<div id="Login-box">
+    <h2 style="color: #fff;">作业管理</h2>
+    <div class="form">
+        <form name="Form" onsubmit="return validateForm()" method="POST">
+            <div class="item">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <input type="text" placeholder="Username" name="username"/>
+            </div>
+            <div class="item">
+                <i class="fa fa-key" aria-hidden="true"></i>
+                <input type="password" placeholder="Password" name="password"/>
+            </div>
+            <button type="submit">登录</button>
+        </form>
+    </div>
+    <div id="Register">
+        <pre><a href="/app/register/">注册</a></pre>
+    </div>
+    <p style="color: white">{{ error }}</p>
+</div>
+</body>
+</html>
+

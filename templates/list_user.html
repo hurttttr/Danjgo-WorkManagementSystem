@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block page-css %}
+    <style>
+        body {
+            background-image: url("/static/image/04.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+        }
+
+        .center {
+            width: 800px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .btn-center {
+            width: 55px;
+            height: 23px;
+            vertical-align: middle;
+            text-align: center;
+            line-height: 13px;
+        }
+    </style>
+{% endblock %}
+{% block main %}
+    <div class="panel panel-default center">
+        <div class="panel-body">
+            成员列表
+            <i class="fa fa-thumb-tack pull-right">
+                <a href="/app/add_user">
+                    <button class="btn btn-center">添加</button>
+                </a>
+            </i>
+        </div>
+        <div class="panel-footer">
+            <table class="table table-hover ">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>username</th>
+                    <th>权限</th>
+                    <th>name</th>
+                    <th>最后登录</th>
+                    <td>操作</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user_dic in user_list %}
+                    <tr>
+                        <td>{{ user_dic.id }}</td>
+                        <td>{{ user_dic.username }}</td>
+                        <td>
+                            {% if user_dic.is_superuser %}
+                                管理员
+                            {% else %}
+                                成员
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ user_dic.first_name }}
+                        </td>
+                        <td>
+                            {{ user_dic.last_login |date:'Y-m-d H:i' }}
+                        </td>
+                        <td>
+                            <a href="/app/edit_user/?id={{ user_dic.id }}">
+                                <span class="glyphicon glyphicon-pencil">编辑</span>
+                            </a>
+                            <a href="/app/delete_user/?id={{ user_dic.id }}">
+                                <span class="glyphicon glyphicon-trash">删除</span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

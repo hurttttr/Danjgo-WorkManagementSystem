@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block page-css %}
+    <script src="/static/js/edit_user.js"></script>
+    <style>
+        body {
+            background-image: url("/static/image/04.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+        }
+
+        .center {
+            width: 700px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .left-label {
+            padding-top: 7px;
+            margin-bottom: 0;
+            text-align: left;
+        }
+    </style>
+{% endblock %}
+{% block main %}
+    <div class="panel panel-primary center">
+        <div class="panel-heading">
+            <h3 class="panel-title">个人信息</h3>
+        </div>
+        <div class="panel-body">
+            <form name="Form" class="form-horizontal" method="post"
+                  action="/app/detail/?username={{ student.username }}" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">用户名：</label>
+                    <label class="col-sm-4 left-label">{{ student.username }}</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">权限：</label>
+                    {% if student.is_superuser %}
+                        <label class="col-sm-4 left-label">管理员</label>
+                    {% else %}
+                        <label class="col-sm-4 left-label">成员</label>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="first_name" class="col-sm-2 control-label">姓名：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="" id="first_name" name="first_name" value={{ student.first_name }}>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword" class="col-sm-2 control-label">新密码：</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="" id="newPassword" name="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newPasswordAgain" class="col-sm-2 control-label">请再次输入：</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="" id="newPasswordAgain" name="passwordagain">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">更改</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block page-css %}
+    <style>
+        body {
+            background-image: url("/static/image/04.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+        }
+
+        .center {
+            width: 700px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .btn-center{
+            width: 55px;
+            height: 23px;
+            vertical-align:middle;
+            text-align: center;
+            line-height: 13px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block main %}
+    <script>
+        function DateDifference(completeTime) {
+            var stime = new Date().getTime();
+            var etime = new Date(completeTime).getTime();
+            var usedTime = etime - stime;  //两个时间戳相差的毫秒数
+            if (usedTime > 0) {
+                var days = Math.floor(usedTime / (24 * 3600 * 1000));
+                //计算出小时数
+                var leave1 = usedTime % (24 * 3600 * 1000);    //计算天数后剩余的毫秒数
+                var hours = Math.floor(leave1 / (3600 * 1000));
+                //计算相差分钟数
+                var leave2 = leave1 % (3600 * 1000);        //计算小时数后剩余的毫秒数
+                var minutes = Math.floor(leave2 / (60 * 1000));
+                var time = days + "天" + hours + "时" + minutes + "分";
+            } else {
+                var time = "已过期！"
+            }
+            return time;
+        }
+    </script>
+    <div class="panel panel-primary center ">
+        <div class="panel-heading">
+            作业列表
+            <i class="fa fa-thumb-tack pull-right">
+                <a href="/app/add_work"  >
+                    <button class="btn btn-center">添加</button>
+                </a>
+            </i>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover ">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>任务名</th>
+                    <th>截止日期</th>
+                    <th>剩余时间</th>
+                    <th>操作</th>
+                    <th>状态</th>
+                    <th>编辑</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for work_dic in work_list %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ work_dic.name }}</td>
+                        <td>
+                            {{ work_dic.deadline |date:'Y-m-d H:i' }}
+                        </td>
+                        <td>
+                            <script>
+                                document.write(DateDifference("{{ work_dic.deadline |date:'Y-m-d H:i' }}"))
+                            </script>
+                        </td>
+                        <td>
+                            <a href="/app/upload_work/?id={{ work_dic.id }}">
+                                <span class="glyphicon glyphicon-open">提交</span>
+                            </a>
+                        </td>
+                        <td>
+                            {% if work_dic.id in finish%}
+                                <span class="glyphicon glyphicon-ok" style="color: #337AB7"></span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="/app/edit/?id={{ work_dic.id }}">
+                                <span class="glyphicon glyphicon-pencil">编辑</span>
+                            </a>
+                            <a href="/app/download/?id={{ work_dic.id }}">
+                                <span class="glyphicon glyphicon-save">下载</span>
+                            </a>
+                            <a href="/app/delete/?id={{ work_dic.id }}">
+                                <span class="glyphicon glyphicon-trash">删除</span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+{% endblock %}

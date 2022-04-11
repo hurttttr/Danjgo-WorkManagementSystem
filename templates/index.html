@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block page-css %}
+    <style>
+        body {
+            background-image: url("/static/image/04.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+        }
+
+        .center {
+            opacity:0.95;
+            width: 800px;
+            height: 400px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+{% endblock %}
+{% block main %}
+    <div class="panel panel-default center ">
+        <div class="panel-body">
+            公告
+        </div>
+        <div class="panel-footer">
+            <p><b>欢迎使用作业管理系统！</b></p>
+            <p><font color="red">注：请使用root批量导入用户，否则自动检测过期作业时会发生异常（导入后的默认密码为123456）</font></p>
+            <p><font>点击右上角的用户名可以触发下拉菜单选择修改个人信息或者注销</font></p>
+            <p><font>管理员下载时若未上传名单则根据root导入用户时的名单生成完成情况（推荐使用这种方式）</font></p>
+            <p>
+                {% if flag %}
+                    <a href="/app/add_userlist">
+                        <button type="button" class="btn btn-primary">导入用户</button>
+                    </a>
+                    <a href="/app/list_user">
+                        <button type="button" class="btn btn-primary">用户列表</button>
+                    </a>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+{% endblock %}
