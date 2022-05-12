@@ -1,6 +1,6 @@
 # 邮箱
-my_mail = '945399100@qq.com'  # 账号
-key = 'uwzqvygiogxtbebd'  # 授权码
+my_mail = ''  # 账号
+key = ''  # 授权码
 
 # mysql
 NAME = 'mywork'  # 数据库名
